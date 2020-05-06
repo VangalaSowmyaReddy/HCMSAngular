@@ -1,0 +1,28 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+      <h2>DiagnostiCenter List</h2>
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>CenterId</th>
+            <th>testid</th>
+           
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let diagnosticCenter of diagnosticCenterList">
+            <td>{{diagnosticCenter.centerId}}</td>
+            <td>{{diagnosticCenter.centerName}}</td>
+    
+            <td>
+              <button (click)="gotoViewTests(diagnosticCenter.centerName)" class="btn btn-info" style="margin-left: 10px">ViewTests</button>
+              <button (click)="gotoCreateTest(diagnosticCenter.centerName)"class="btn btn-info" style="margin-left: 10px">CreateTest</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
