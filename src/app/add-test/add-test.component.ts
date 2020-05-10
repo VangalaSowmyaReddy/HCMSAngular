@@ -1,43 +1,46 @@
 import { Component, OnInit } from '@angular/core';
-import { DiagnosticCenter } from '../diagnostic-center';
-import { HealthCareAdminService } from '../health-care-admin.service';
-import { Test } from '../test';
-import { Router } from '@angular/router';
-
+import { HttpClientService , DiagnosticCentre } from '../service.service';
 @Component({
-  selector: 'app-add-test',
-  templateUrl: './add-test.component.html',
-  styleUrls: ['./add-test.component.css']
+  selector: 'app-add-Test',
+  templateUrl: './add-Test.component.html',
+  styleUrls: ['./add-Test.component.css']
 })
-export class AddTestComponent implements OnInit {
-
-  diagnosticCenterList:DiagnosticCenter[]=[];
-  // diagnosticCenter:DiagnosticCenter;
-  // viewTestList:boolean=false;
-
-  constructor(private healthCareAdminService:HealthCareAdminService, private router: Router) { }
+export class AddCentreComponent implements OnInit {
   
-  ngOnInit() 
-  {
-    this.loadData();
-  }
+  user: DiagnosticCentre = new DiagnosticCentre("","","");
+  centersList: any;
+  constructor(
+    private httpClientService: HttpClientService
+  ) { }
 
-  loadData() 
-  {
-      this.healthCareAdminService.getDiagnosticCenterList().subscribe(data=>
-      {
-        this.diagnosticCenterList=data;
-      },
-      error=>
-       {
-         console.log("error occured",error);
-       }
-      )
+  ngOnInit(){
+     
+     this.getCenterNames();
   }
+  createTest(): void {
 
- 
-  gotoCreateTest(centerName:string)
-  {
-    this.router.navigate([`/CreatTest/${centerName}`]);
+    this.httpClientService.createTest(this.user)
+        .subscribe(data => {
+          if(data){
+          alert("added successfully.");
+          }else{
+            alert("Test Already exist!!");
+          }
+        });
+
+  };
+  
+
+  getCenterNames(): any {
+
+    let cntname = new Array();
+  
+   return  this.httpClientService.getCenterNames()
+    .subscribe( data => {
+      data.forEach(element => {
+        cntname.push(element.centreName);
+      });
+      this.centersList = cntname;
+    });
   }
 }

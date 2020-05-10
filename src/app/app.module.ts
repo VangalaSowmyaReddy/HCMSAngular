@@ -3,32 +3,30 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AddCentreComponent } from './add-Test/add-Test.component';
+
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { HealthCareAdminService } from './health-care-admin.service';
-
-
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AddTestComponent } from './add-test/add-test.component';
-import { RemoveTestComponent } from './remove-test/remove-test.component';
-
-
+import { CentresComponent } from './centres/centres.component';
+import { HeaderComponent } from './header/header.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-  
-
-    AddTestComponent,
-    RemoveTestComponent,
+    AddCentreComponent,
+   
+    CentresComponent,
+    HeaderComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule
+    FormsModule
   ],
-  providers: [HealthCareAdminService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
