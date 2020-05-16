@@ -8,6 +8,7 @@ export class DiagnosticCentre {
     public testId: String
   ) {}
 }
+export class ServiceService{}
 @Injectable({
   providedIn: 'root'
 })
@@ -21,12 +22,12 @@ export class HttpClientService {
      {
        console.log("test call");
        //To populate the data in delete page
-       return this.httpClient.get<any[]>("http://localhost:1400/Test/find");
+       return this.httpClient.get<any[]>("http://localhost:2020/Test/find");
      }
   public deleteTest(testId) {
     debugger;
     console.log(testId);
-    return this.httpClient.delete<DiagnosticCentre>("http://localhost:1308/Test/delete/"+ testId);
+    return this.httpClient.delete<DiagnosticCentre>("http://localhost:2020/Test/delete/"+ testId);
     
   }
   public createTest(diagnosticCentre) {
@@ -39,12 +40,12 @@ export class HttpClientService {
         }
         
     };
-    return this.httpClient.post<any>("http://localhost:1400/Test/create", dataToSend);
+    return this.httpClient.post<any>("http://localhost:2020/Test/create", dataToSend);
     
   }
   
   public getCenterNames(){
-    return this.httpClient.get<any>("http://localhost:1400/Test/findCentre");
+    return this.httpClient.get<any>("http://localhost:2020/Test/findCentre");
    // add dropdown
 
   }

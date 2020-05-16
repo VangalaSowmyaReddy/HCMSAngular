@@ -5,10 +5,12 @@ import { HttpClientService , DiagnosticCentre } from '../service.service';
   templateUrl: './add-Test.component.html',
   styleUrls: ['./add-Test.component.css']
 })
-export class AddCentreComponent implements OnInit {
+export class AddTestComponent implements OnInit {
   
   user: DiagnosticCentre = new DiagnosticCentre("","","");
-  centersList: any;
+  
+ centersList:any;
+ public message=""
   constructor(
     private httpClientService: HttpClientService
   ) { }
@@ -18,15 +20,10 @@ export class AddCentreComponent implements OnInit {
      this.getCenterNames();
   }
   createTest(): void {
-
-    this.httpClientService.createTest(this.user)
-        .subscribe(data => {
-          if(data){
-          alert("added successfully.");
-          }else{
-            alert("Test Already exist!!");
-          }
-        });
+this.message='Test is added Successfully'
+ this.httpClientService.createTest(this.user).subscribe(data => {
+          
+ });
 
   };
   
@@ -37,10 +34,11 @@ export class AddCentreComponent implements OnInit {
   
    return  this.httpClientService.getCenterNames()
     .subscribe( data => {
-      data.forEach(element => {
+        data.forEach(element => {
         cntname.push(element.centreName);
-      });
+      })
       this.centersList = cntname;
+      
     });
-  }
+  }  
 }
